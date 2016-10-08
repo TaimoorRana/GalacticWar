@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyFormation : MonoBehaviour {
 	[SerializeField] GameObject BossGameObject;
+	[SerializeField] int totalWaves;
 	float lowestShip, highestShip;
 	Transform[] allChildren;
 	List<Transform> enemyShips;
@@ -64,10 +65,20 @@ public class EnemyFormation : MonoBehaviour {
 	}
 
 	public void activateEnemies(){
-		transform.position = originalPosition.position;
-		foreach(Transform t in enemyShips){
-			t.gameObject.SetActive (true);
+		if(totalWaves < 0)
+			return;
+		
+		if (totalWaves > 0) {
+			transform.position = originalPosition.position;
+			foreach (Transform t in enemyShips) {
+				t.gameObject.SetActive (true);
+			}
+		} else {
+			GameObject boss = Instantiate (BossGameObject) as GameObject;
+			boss.transform.parent = this.transform;
+			boss.transform.position = new Vector3 (boss.transform.position.x, boss.transform.parent.position.y, boss.transform.position.z);
 		}
+		totalWaves--;
 	}
 
 	public Vector2 FindLastEnemyPosition(){

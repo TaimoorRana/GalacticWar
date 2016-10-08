@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemyProducer : MonoBehaviour {
 	[SerializeField] GameObject powerUp;
+	[SerializeField] float padding;
 
 	public GameObject enemyGroup;
 	public float angleSpeed = 5f;
@@ -59,11 +60,11 @@ public class EnemyProducer : MonoBehaviour {
 
 		if (goingDown) {
 			currentY -= Time.deltaTime * speed;
-			if (currentY < -yBoundary + enemyFormation.getLowestShipYPosition ())
+			if (currentY < -yBoundary + enemyFormation.getLowestShipYPosition () + padding )
 				goingDown = false;
 		} else {
 			currentY += Time.deltaTime * speed;
-			if (currentY >= yBoundary - enemyFormation.getHighestShipYPosition ())
+			if (currentY >= yBoundary - enemyFormation.getHighestShipYPosition () - padding)
 				goingDown = true;
 
 		}
