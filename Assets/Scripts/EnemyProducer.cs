@@ -2,13 +2,14 @@
 using System.Collections;
 
 public class EnemyProducer : MonoBehaviour {
-	[SerializeField] GameObject powerUp;
+	
 	[SerializeField] float padding;
 
 	public GameObject enemyGroup;
 	public float angleSpeed = 5f;
 	public float speed;
-	public bool sin = false, powerUpDropped = false;
+	public bool sin = false;
+	public bool produceEnemies = true;
 
 	EnemyFormation enemyFormation;
 
@@ -37,11 +38,10 @@ public class EnemyProducer : MonoBehaviour {
 		if (enemyFormation.hasEnemy ()) {
 			MoveEnemiesVertically ();
 
-		} else {
-				currentY = yBoundary + Mathf.Abs (enemyFormation.getLowestShipYPosition ());
-				GetLastEnemyPosition ();
-				Invoke ("ReactivateEnemyFormation", 3);
 		} 
+
+
+
 
 		if(!sin)
 			enemyFormationTransform.position = new Vector3 (enemyFormationTransform.position.x,currentY,enemyFormationTransform.position.z);
@@ -51,10 +51,6 @@ public class EnemyProducer : MonoBehaviour {
 
 	}
 
-	void ReactivateEnemyFormation(){
-		enemyFormation.activateEnemies ();
-		powerUpDropped = false;
-	}
 
 	void MoveEnemiesVertically(){
 
@@ -87,10 +83,8 @@ public class EnemyProducer : MonoBehaviour {
 	}
 
 	void GetLastEnemyPosition(){
-		if (enemyFormation.FindLastEnemyPosition () != Vector2.zero && !powerUpDropped) {
-			GameObject powerUpCopy = Instantiate (powerUp);
-			powerUpCopy.transform.position = enemyFormation.FindLastEnemyPosition ();
-			powerUpDropped = true;
+		if (enemyFormation.FindLastEnemyPosition () != Vector2.zero) {
+			
 		}
 	}
 

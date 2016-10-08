@@ -5,11 +5,15 @@ using System.Collections.Generic;
 public class EnemyFormation : MonoBehaviour {
 	[SerializeField] GameObject BossGameObject;
 	[SerializeField] int totalWaves;
+	[SerializeField] GameObject powerUp;
+	bool powerUpDropped = false;
 	float lowestShip, highestShip;
 	Transform[] allChildren;
 	List<Transform> enemyShips;
 	Transform originalPosition;
 	Vector2 lastEnemyPosition;
+
+	bool producing = false;
 
 
 
@@ -22,7 +26,14 @@ public class EnemyFormation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (!hasEnemy () && totalWaves > 0 && !producing) {
+			totalWaves--;
+			Invoke ("activateEnemies", 3f);
+			producing = true;
+			if(GameObject.FindObjectOfType<PlayerManager>().weaponLevel < 3)
+			givePowerUp();
+		}
+			
 	}
 
 	void searchLowestAndHighestShipPosition(){
@@ -58,27 +69,34 @@ public class EnemyFormation : MonoBehaviour {
 	}
 
 	public bool hasEnemy(){
-		if (GetComponentsInChildren<EnemyManager> ().Length >= 1)
+		if (GetComponentsInChildren<EnemyManager> ().Length >= 1) {
+			producing = false;
 			return true;
+		}
 
 		return false;
 	}
 
 	public void activateEnemies(){
+		
+
 		if(totalWaves < 0)
 			return;
 		
 		if (totalWaves > 0) {
+			
 			transform.position = originalPosition.position;
 			foreach (Transform t in enemyShips) {
 				t.gameObject.SetActive (true);
 			}
+
 		} else {
 			GameObject boss = Instantiate (BossGameObject) as GameObject;
 			boss.transform.parent = this.transform;
 			boss.transform.position = new Vector3 (boss.transform.position.x, boss.transform.parent.position.y, boss.transform.position.z);
 		}
-		totalWaves--;
+		producing = false;
+
 	}
 
 	public Vector2 FindLastEnemyPosition(){
@@ -94,5 +112,11 @@ public class EnemyFormation : MonoBehaviour {
 		}
 
 		return Vector2.zero;
+	}
+
+	public void givePowerUp(){
+		GameObject powerUpCopy = Instantiate (powerUp);
+		powerUpCopy.transform.position = FindLastEnemyPosition ();
+		powerUpDropped = true;
 	}
 }
