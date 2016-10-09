@@ -148,7 +148,7 @@ public class PlayerManager : MonoBehaviour {
 
 	public void DownGradeWeapon(){
 
-		if (weaponLevel > 1) {
+		if (weaponLevel > 0) {
 			weaponLevel--;
 			GameObject.FindObjectOfType<PlayerHealthManager> ().removeHealth ();
 			Debug.Log ("level downgrade " + weaponLevel);
@@ -164,6 +164,13 @@ public class PlayerManager : MonoBehaviour {
 			weaponUpgradPerformed = false;
 			upgradeWeapon ();
 			GameObject.FindObjectOfType<PlayerHealthManager> ().addHealth ();
+		}else if (coll.gameObject.tag == "Bullet"){
+			if (weaponLevel > 1) {
+				DownGradeWeapon ();
+			} else {
+				DownGradeWeapon ();
+				gameObject.SetActive (false);
+			}
 		}
 	}
 

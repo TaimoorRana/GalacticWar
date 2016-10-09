@@ -5,13 +5,14 @@ public class FinalBoss : EnemyManager {
 	[SerializeField] GameObject bullet;
 	[SerializeField] float rotationSpeed;
 	[SerializeField] GameObject core;
-
+	[SerializeField] Transform[] bulletSpawnLocations;
+	[SerializeField] GameObject bossHealthManager;
 	public float speed;
 	float shootInterval;
 	float yBoundary,xBoundary, currentY, currentX;
 	bool goingDown = true, goingRight = true;
 	bool coreCreated = false;
-	[SerializeField] Transform[] bulletSpawnLocations;
+
 
 	int weakPoint1Hits = 0, weakPoint2Hits = 0, coreHits = 0;
 
@@ -21,6 +22,7 @@ public class FinalBoss : EnemyManager {
 		yBoundary = Camera.main.orthographicSize;
 		xBoundary =  (Screen.width / Screen.height) * yBoundary;
 		InvokeRepeating("LaunchProjectile", shootInterval, shootInterval);
+		Instantiate (bossHealthManager);
 	}
 	
 	// Update is called once per frame
@@ -41,7 +43,8 @@ public class FinalBoss : EnemyManager {
 				weakPoint2Hits++;
 			break;
 		case "Core(Clone)":
- 			coreHits++;
+			coreHits++;
+			GameObject.FindObjectOfType<BossHealthManager> ().removeHealth ();
 			if (coreHits > 15)
 				gameObject.SetActive (false);
 			break;

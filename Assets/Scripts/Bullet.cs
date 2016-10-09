@@ -17,16 +17,9 @@ public class Bullet : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 		Destroy (gameObject);
 		if(coll.gameObject.tag == "Enemy"){
-			Debug.Log ("Bullet collided");
+			Debug.Log ("Bullet collided"); 
 			coll.gameObject.SetActive(false);
 			score.addScore (100);
-		}else if(coll.gameObject.tag == "Player"){
-			if (coll.gameObject.GetComponent<PlayerManager> ().weaponLevel > 1) {
-				coll.gameObject.GetComponent<PlayerManager> ().DownGradeWeapon ();
-			} else {
-				coll.gameObject.SetActive (false);
-				coll.gameObject.GetComponent<Renderer> ().enabled = false;
-			}
 		}
 	}
 }
