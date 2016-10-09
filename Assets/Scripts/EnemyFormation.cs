@@ -7,7 +7,7 @@ public class EnemyFormation : MonoBehaviour {
 	[SerializeField] int totalWaves;
 	[SerializeField] GameObject powerUp;
 	bool powerUpDropped = false;
-	float lowestShip, highestShip;
+	float lowestShip, highestShip, leftestShip, rightestShip;
 	Transform[] allChildren;
 	List<Transform> enemyShips;
 	Transform originalPosition;
@@ -56,6 +56,11 @@ public class EnemyFormation : MonoBehaviour {
 					lowestShip = trans.position.y;
 				if (trans.position.y > highestShip)
 					highestShip = trans.position.y;
+				if (trans.position.x < leftestShip)
+					leftestShip = trans.position.x;
+				if (trans.position.x > rightestShip)
+					rightestShip = trans.position.x;		
+
 			}
 		}
 	}
@@ -66,6 +71,14 @@ public class EnemyFormation : MonoBehaviour {
 
 	public float getHighestShipYPosition(){
 		return highestShip;
+	}
+
+	public float getLeftestShipXPosition(){
+		return leftestShip;
+	}
+
+	public float getRightestShipXPosition(){
+		return rightestShip;
 	}
 
 	public bool hasEnemy(){

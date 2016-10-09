@@ -67,15 +67,15 @@ public class EnemyProducer : MonoBehaviour {
 
 		if (sin) {
 			if (goingRight) {
-				angle += Time.deltaTime * angleSpeed;
-				currentX += Mathf.Sin (angle);
-				if (currentX >= xBoundary) {
+				//angle += Time.deltaTime * angleSpeed;
+				currentX += Time.deltaTime * speed;
+				if (currentX >= xBoundary - padding) {
 					goingRight = false;
 				}
 			} else {
-				angle -= Time.deltaTime * angleSpeed;
-				currentX += Mathf.Sin (angle);
-				if (currentX < -xBoundary) {
+				//angle -= Time.deltaTime * angleSpeed;
+				currentX -= Time.deltaTime * speed;
+				if (currentX < -xBoundary + padding ) {
 					goingRight = true;
 				}
 			}	
