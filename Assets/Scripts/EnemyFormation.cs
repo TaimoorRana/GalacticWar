@@ -31,7 +31,7 @@ public class EnemyFormation : MonoBehaviour {
 			Invoke ("activateEnemies", 3f);
 			producing = true;
 			if(GameObject.FindObjectOfType<PlayerManager>().weaponLevel < 3)
-			givePowerUp();
+				givePowerUp();
 		}
 			
 	}
@@ -106,7 +106,8 @@ public class EnemyFormation : MonoBehaviour {
 		} else {
 			GameObject boss = Instantiate (BossGameObject) as GameObject;
 			boss.transform.parent = this.transform;
-			boss.transform.position = new Vector3 (boss.transform.position.x, boss.transform.parent.position.y, boss.transform.position.z);
+			boss.transform.position = new Vector3 (boss.transform.position.x, boss.transform.parent.position.y, 0);
+
 		}
 		producing = false;
 

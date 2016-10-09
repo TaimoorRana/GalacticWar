@@ -44,9 +44,9 @@ public class EnemyProducer : MonoBehaviour {
 
 
 		if(!sin)
-			enemyFormationTransform.position = new Vector3 (enemyFormationTransform.position.x,currentY,enemyFormationTransform.position.z);
+			enemyFormationTransform.position = new Vector3 (enemyFormationTransform.position.x,currentY,0);
 		else
-			enemyFormationTransform.position = new Vector3 (currentX,currentY,enemyFormationTransform.position.z);
+			enemyFormationTransform.position = new Vector3 (currentX,currentY,0);
 
 
 	}

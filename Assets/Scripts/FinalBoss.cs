@@ -3,13 +3,13 @@ using System.Collections;
 
 public class FinalBoss : EnemyManager {
 	[SerializeField] GameObject bullet;
-	[SerializeField] Transform[] bulletSpawnLocations;
 	[SerializeField] float rotationSpeed;
-	public float speed;
 
+	public float speed;
 	float shootInterval;
 	float yBoundary,xBoundary, currentY, currentX;
 	bool goingDown = true, goingRight = true;
+	[SerializeField] Transform[] bulletSpawnLocations;
 
 	// Use this for initialization
 	void Start () {
@@ -51,7 +51,7 @@ public class FinalBoss : EnemyManager {
 				goingDown = true;
 
 		}
-		transform.position = new Vector3 (transform.position.x, currentY, transform.position.z);
+		transform.position = new Vector3 (transform.position.x, currentY, 0);
 	}
 
 }
