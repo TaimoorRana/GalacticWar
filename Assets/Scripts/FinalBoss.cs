@@ -42,7 +42,7 @@ public class FinalBoss : EnemyManager {
 			break;
 		case "Core(Clone)":
  			coreHits++;
-			if (coreHits > 1)
+			if (coreHits > 15)
 				gameObject.SetActive (false);
 			break;
 		}

@@ -12,6 +12,7 @@ public class EnemyFormation : MonoBehaviour {
 	List<Transform> enemyShips;
 	Transform originalPosition;
 	Vector2 lastEnemyPosition;
+	ScoreManager scoreManager;
 
 	bool producing = false;
 
@@ -22,6 +23,7 @@ public class EnemyFormation : MonoBehaviour {
 		enemyShips = new List<Transform> ();
 		searchLowestAndHighestShipPosition ();
 		originalPosition = transform;
+		scoreManager = GameObject.FindObjectOfType<ScoreManager> ();
 	}
 	
 	// Update is called once per frame
@@ -29,6 +31,7 @@ public class EnemyFormation : MonoBehaviour {
 		if (!hasEnemy () && totalWaves > 0 && !producing) {
 			totalWaves--;
 			Invoke ("activateEnemies", 3f);
+			scoreManager.doubleScore ();
 			producing = true;
 			if(GameObject.FindObjectOfType<PlayerManager>().weaponLevel < 3)
 				givePowerUp();
