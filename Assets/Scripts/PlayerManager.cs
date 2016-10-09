@@ -146,6 +146,16 @@ public class PlayerManager : MonoBehaviour {
 
 	}
 
+	public void DownGradeWeapon(){
+
+		if (weaponLevel > 1) {
+			weaponLevel--;
+			GameObject.FindObjectOfType<PlayerHealthManager> ().removeHealth ();
+			Debug.Log ("level downgrade " + weaponLevel);
+		}
+
+	}
+
 	void OnCollisionEnter2D(Collision2D coll){
 		Debug.Log ("Power up Collision");
 		if (coll.gameObject.tag == "PowerUp") {
@@ -153,7 +163,9 @@ public class PlayerManager : MonoBehaviour {
 			Destroy (coll.gameObject);
 			weaponUpgradPerformed = false;
 			upgradeWeapon ();
-
+			GameObject.FindObjectOfType<PlayerHealthManager> ().addHealth ();
 		}
 	}
+
+
 }

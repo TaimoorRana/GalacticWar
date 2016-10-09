@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour {
 			score.addScore (100);
 		}else if(coll.gameObject.tag == "Player"){
 			if (coll.gameObject.GetComponent<PlayerManager> ().weaponLevel > 1) {
-				coll.gameObject.GetComponent<PlayerManager> ().weaponLevel -= 1;
+				coll.gameObject.GetComponent<PlayerManager> ().DownGradeWeapon ();
 			} else {
 				coll.gameObject.SetActive (false);
 				coll.gameObject.GetComponent<Renderer> ().enabled = false;
