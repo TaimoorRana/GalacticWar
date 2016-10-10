@@ -8,6 +8,7 @@ public class PlayerHealthManager : MonoBehaviour {
 	PlayerManager player;
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindObjectOfType<PlayerManager> ();
 		addHealth ();
 	}
 	

@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Modes : MonoBehaviour {
-	public static bool insanity = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,13 +13,13 @@ public class Modes : MonoBehaviour {
 	}
 
 	public void loadNormalMode(){
-		DontDestroyOnLoad (this);
+		PlayerPrefs.SetInt ("insanity", 0);
 		Application.LoadLevel("Main");
+
 	}
 
 	public void loadInsanityMode(){
-		insanity = true;
-		DontDestroyOnLoad (this);
+		PlayerPrefs.SetInt ("insanity", 1);
 		Application.LoadLevel("Main");
 	}
 }

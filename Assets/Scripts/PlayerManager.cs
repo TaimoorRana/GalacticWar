@@ -170,6 +170,7 @@ public class PlayerManager : MonoBehaviour {
 			} else {
 				DownGradeWeapon ();
 				gameObject.SetActive (false);
+				Application.LoadLevel("MainMenu");
 			}
 		}
 	}
