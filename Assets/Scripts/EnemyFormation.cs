@@ -94,10 +94,17 @@ public class EnemyFormation : MonoBehaviour {
 	}
 
 	public void activateEnemies(){
-		
+		if (totalWaves == 1 || totalWaves == 2) {
+			GameObject.FindObjectOfType<EnemyProducer> ().sin = true;
+		}
 
-		if(totalWaves < 0)
+
+		if (totalWaves == 0) {
+			GameObject.FindObjectOfType<StarField> ().ScrollSwitch ();
+			Invoke ("StarFieldScrollSwitch", 5f);
+			totalWaves--;
 			return;
+		}
 		
 		if (totalWaves > 0) {
 			
@@ -114,6 +121,11 @@ public class EnemyFormation : MonoBehaviour {
 		}
 		producing = false;
 
+	}
+
+	public void StarFieldScrollSwitch(){
+		GameObject.FindObjectOfType<StarField> ().ScrollSwitch ();
+		activateEnemies ();
 	}
 
 	public Vector2 FindLastEnemyPosition(){

@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Modes : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
-	
+		PlayerPrefs.GetInt ("score");
+		GameObject.Find ("Score").GetComponent<Text>().text =  "HIGHSCORE : " + PlayerPrefs.GetInt ("score");
 	}
 	
 	// Update is called once per frame

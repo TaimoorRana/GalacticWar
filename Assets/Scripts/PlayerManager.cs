@@ -157,21 +157,22 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll){
-		Debug.Log ("Power up Collision");
 		if (coll.gameObject.tag == "PowerUp") {
 			Debug.Log ("Power up Collision");
 			Destroy (coll.gameObject);
 			weaponUpgradPerformed = false;
 			upgradeWeapon ();
 			GameObject.FindObjectOfType<PlayerHealthManager> ().addHealth ();
-		}else if (coll.gameObject.tag == "Bullet"){
+		} else if (coll.gameObject.tag == "Bullet") {
 			if (weaponLevel > 1) {
 				DownGradeWeapon ();
 			} else {
-				DownGradeWeapon ();
 				gameObject.SetActive (false);
-				Application.LoadLevel("MainMenu");
+				Application.LoadLevel ("MainMenu");
 			}
+		} else {
+			DownGradeWeapon ();
+			Debug.Log ("Player hit Enemie");
 		}
 	}
 

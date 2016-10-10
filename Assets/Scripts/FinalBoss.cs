@@ -45,8 +45,10 @@ public class FinalBoss : EnemyManager {
 		case "Core(Clone)":
 			coreHits++;
 			GameObject.FindObjectOfType<BossHealthManager> ().removeHealth ();
-			if (coreHits > 15)
+			if (coreHits > 14) {
+				Application.LoadLevel ("MainMenu");
 				gameObject.SetActive (false);
+			}
 			break;
 		}
 
@@ -76,6 +78,7 @@ public class FinalBoss : EnemyManager {
 				bulletCopy.transform.position = trans.position;
 				bulletCopy.transform.rotation = trans.rotation;
 				bulletCopy.transform.Rotate (180, 0, 0);
+				bulletCopy.GetComponent < Bullet> ().turnOffInsanity ();
 			}
 		}
 

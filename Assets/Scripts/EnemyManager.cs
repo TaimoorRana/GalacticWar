@@ -39,9 +39,7 @@ public class EnemyManager : MonoBehaviour {
 		if (coll.gameObject.tag == "Bullet") {
 			gameObject.SetActive (false);
 			score.addScore (100);
-		} else if (coll.gameObject.tag == "Player") {
-			GameObject.FindObjectOfType<PlayerManager> ().DownGradeWeapon ();
-		}
+		} 
 	}
 
 
